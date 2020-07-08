@@ -10,6 +10,9 @@ export default {
   title: "Button (Zen) (React)",
   component: Button,
   parameters: {
+    axe: {
+      enabled: true,
+    },
     info: {
       text: `
         import { Button } from "@kaizen/draft-button";
