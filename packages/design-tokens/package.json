@@ -25,12 +25,11 @@
     "prepublish": "yarn build:less && yarn build:sass"
   },
   "devDependencies": {
-    "husky": "^4.2.5",
     "json-to-flat-sass": "^1.0.0"
   },
   "husky": {
     "hooks": {
-      "pre-push": "yarn prepublish"
+      "pre-push": "yarn prepublish && git add ."
     }
   }
 }
