@@ -578,4 +578,32 @@ describe("<TitleBlockZen />", () => {
       expect(testOnClickFn).not.toHaveBeenCalled()
     })
   })
+
+  describe("when a secondary overflow menu is passed but no secondary actions are passed", () => {
+    const testOnClickFn = jest.fn()
+
+    const secondaryOverflowOnly = [
+      {
+        label: "secondaryOverflowItem1",
+        action: testOnClickFn,
+      },
+    ]
+
+    it("renders the overflow menu", () => {
+      const { getByTestId, getByText } = render(
+        <TitleBlockZen
+          title="Test Title"
+          secondaryOverflowMenuItems={secondaryOverflowOnly}
+        >
+          Example
+        </TitleBlockZen>
+      )
+      const btn = getByTestId("title-block-secondary-overflow-menu")
+      expect(btn).toBeTruthy()
+      fireEvent.click(btn)
+      const item = getByText("secondaryOverflowItem1")
+      fireEvent.click(item)
+      expect(testOnClickFn).toHaveBeenCalled()
+    })
+  })
 })
