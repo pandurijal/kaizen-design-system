@@ -1,0 +1,151 @@
+@import "~@kaizen/component-library/styles/animation";
+@import "~@kaizen/design-tokens/sass/color";
+@import "~@kaizen/deprecated-component-library-helpers/styles/type";
+
+// START from ../typography.scss
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin font-body {
+  @include font-smoothing;
+  font-family: $kz-typography-paragraph-body-font-family;
+  font-weight: $kz-typography-paragraph-body-font-weight;
+  font-size: $kz-typography-paragraph-body-font-size;
+  line-height: $kz-typography-paragraph-body-line-height;
+  letter-spacing: $kz-typography-paragraph-body-letter-spacing;
+}
+
+@mixin font-small {
+  @include font-smoothing;
+  font-family: $kz-typography-paragraph-small-font-family;
+  font-weight: $kz-typography-paragraph-small-font-weight;
+  font-size: $kz-typography-paragraph-small-font-size;
+  line-height: $kz-typography-paragraph-small-line-height;
+  letter-spacing: $kz-typography-paragraph-small-letter-spacing;
+}
+
+@mixin font-extra-small {
+  @include font-smoothing;
+  font-family: $kz-typography-paragraph-extra-small-font-family;
+  font-weight: $kz-typography-paragraph-extra-small-font-weight;
+  font-size: $kz-typography-paragraph-extra-small-font-size;
+  line-height: $kz-typography-paragraph-extra-small-line-height;
+  letter-spacing: $kz-typography-paragraph-extra-small-letter-spacing;
+}
+
+@mixin font-heading-2 {
+  @include font-smoothing;
+  font-family: $kz-typography-heading-2-font-family;
+  font-weight: $kz-typography-heading-2-font-weight;
+  font-size: $kz-typography-heading-2-font-size;
+  line-height: $kz-typography-heading-2-line-height;
+  letter-spacing: $kz-typography-heading-2-letter-spacing;
+}
+
+@mixin font-heading-6 {
+  font-family: $kz-typography-heading-6-font-family;
+  font-weight: $kz-typography-heading-6-font-weight;
+  font-size: $kz-typography-heading-6-font-size;
+  line-height: $kz-typography-heading-6-line-height;
+  letter-spacing: $kz-typography-heading-6-letter-spacing;
+}
+
+@mixin font-link {
+  @include font-body;
+  color: $kz-color-cluny-500;
+  text-decoration: none;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $kz-color-cluny-500;
+}
+// END from ../typography.scss
+
+.modal {
+  @include font-body;
+  composes: genericModal from "~@kaizen/draft-modal/KaizenDraft/Modal/Primitives/GenericModal.scss";
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 360px;
+  border-radius: 0;
+  margin: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: $kz-color-cluny-100;
+}
+
+.overflowWrapper {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.topContent {
+  color: $kz-color-white;
+  padding: $ca-grid $ca-grid 19px;
+  background: $kz-color-cluny-500;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+}
+
+.title {
+  @include font-heading-2;
+  color: $kz-color-white;
+  display: flex;
+  font-size: 30px;
+  justify-content: center;
+  line-height: 36px;
+  margin: $ca-grid 0;
+  width: 100%;
+}
+
+:global(.animating-enter),
+:global(.animating-appear) {
+  .modal {
+    @include ca-animation(
+      fade($from: 0, $to: 1),
+      slide($state: in, $direction: left)
+    );
+    animation-duration: $ca-duration-fast;
+    animation-timing-function: $ca-ease-in-out;
+  }
+}
+
+:global(.animating-exit) {
+  .modal {
+    @include ca-animation(
+      fade($from: 1, $to: 0),
+      slide($state: out, $direction: right)
+    );
+    animation-duration: $ca-duration-fast;
+    animation-fill-mode: forwards;
+    animation-timing-function: $ca-ease-in-out;
+  }
+}
+
+:global(.__react_component_tooltip) {
+  @include font-extra-small;
+}
+
+.boxShadow {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
